@@ -23,7 +23,6 @@ class CreateDoctorsTable extends Migration
             $table->string('doctor_type')->comment('1=Duty Doctor, 2=Supervice Doctor');
             $table->integer('department_id')->unsigned()->nullable();
             $table->text('specialization');
-            $table->string('chamber_days');
             $table->string('chamber_time');
             $table->text('image');
             $table->rememberToken();

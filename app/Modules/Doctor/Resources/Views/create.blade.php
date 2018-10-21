@@ -9,7 +9,7 @@
 @section('content')
     <div class="uk-grid">
         <div class="uk-width-large-10-10">
-            {!! Form::open(['url' => route('stuff_store'), 'method' => 'POST', 'class' => 'user_edit_form', 'id' => 'my_profile', 'files' => 'true', 'enctype' => "multipart/form-data", 'novalidate']) !!}
+            {!! Form::open(['url' => route('doctor_store'), 'method' => 'POST', 'class' => 'user_edit_form', 'id' => 'my_profile', 'files' => 'true', 'enctype' => "multipart/form-data", 'novalidate']) !!}
             <div class="uk-grid uk-grid-medium" data-uk-grid-margin>
                 <div class="uk-width-xLarge-10-10 uk-width-large-10-10">
                     <div class="md-card">
@@ -25,7 +25,7 @@
 
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-5  uk-vertical-align">
-                                        <label class="uk-vertical-align-middle" for="department_id">Type<span class="req">*</span></label>
+                                        <label class="uk-vertical-align-middle" for="department_id">Department<span class="req">*</span></label>
                                     </div>
                                     <div class="uk-width-medium-2-5">
                                         <select id="type" name="department_id" required data-md-selectize aria-required="true">
@@ -34,9 +34,9 @@
                                                 <option value="{{ $department->id }}">{{ $department->name }}</option>
                                             @endforeach
                                         </select>
-                                        @if ($errors->has('type'))
+                                        @if ($errors->has('department_id'))
                                             <span class="error">
-                                                <strong>{{ $errors->first('type') }}</strong>
+                                                <strong>{{ $errors->first('department_id') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="uk-width-medium-2-5">
                                         <label for="age">Degree</label>
-                                        <input class="md-input" type="text" id="degree" name="degree">
+                                        <input class="md-input" type="text" id="degree" value="{{ old('degree') }}" name="degree">
                                     </div>
                                 </div>
 
@@ -102,7 +102,7 @@
                                     </div>
                                     <div class="uk-width-medium-2-5">
                                         <label for="age">Designation</label>
-                                        <input class="md-input" type="text" id="designation" name="designation">
+                                        <input class="md-input" type="text" id="designation" value="{{ old('designation') }}" name="designation">
                                     </div>
                                 </div>
 
@@ -124,7 +124,7 @@
                                     </div>
                                     <div class="uk-width-medium-2-5">
                                         <label for="age">Work Place</label>
-                                        <input class="md-input" type="text" id="work_place" name="work_place">
+                                        <input class="md-input" type="text" id="work_place" value="{{ old('work_place') }}" name="work_place">
                                     </div>
                                 </div>
 
@@ -145,28 +145,28 @@
 
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-5  uk-vertical-align">
-                                        <label class="uk-vertical-align-middle" for="chamber_days">Chamber Days<span class="req">*</span></label>
+                                        <label class="uk-vertical-align-middle" for="chamber_day_id">Chamber Days<span class="req">*</span></label>
                                     </div>
                                     <div class="uk-width-medium-2-5">
                                         <div class="uk-input-group">
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_days[]" value="1" data-md-icheck/></span>
+                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="1" data-md-icheck/></span>
                                             <label>Saturday</label>
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_days[]" value="2" data-md-icheck/></span>
+                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="2" data-md-icheck/></span>
                                             <label>Sunday</label>
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_days[]" value="3" data-md-icheck/></span>
+                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="3" data-md-icheck/></span>
                                             <label>Monday</label>
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_days[]" value="4" data-md-icheck/></span>
+                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="4" data-md-icheck/></span>
                                             <label>Tuesday</label>
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_days[]" value="5" data-md-icheck/></span>
+                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="5" data-md-icheck/></span>
                                             <label>Wednesday</label>
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_days[]" value="6" data-md-icheck/></span>
+                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="6" data-md-icheck/></span>
                                             <label>Thursday</label>
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_days[]" value="7" data-md-icheck/></span>
+                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="7" data-md-icheck/></span>
                                             <label>Friday</label>
                                         </div>
-                                        @if ($errors->has('chamber_days'))
+                                        @if ($errors->has('chamber_day_id'))
                                             <span class="error">
-                                                <strong>{{ $errors->first('chamber_days') }}</strong>
+                                                <strong>{{ $errors->first('chamber_day_id') }}</strong>
                                             </span>
                                         @endif
                                     </div>

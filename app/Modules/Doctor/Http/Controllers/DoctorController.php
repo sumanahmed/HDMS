@@ -3,6 +3,7 @@
 namespace App\Modules\Doctor\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\DoctorChamber;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Http\Requests;
@@ -24,14 +25,17 @@ class DoctorController extends Controller
     public function store(Request $request){
 
         $this->validate($request,[
+
+            'department_id'=>'required',
             'name'=>'required|min:5|max:35',
             'mobile'=>'required|numeric',
             'email'=>'required',
             'degree'=>'required',
             'designation'=>'required',
             'specialization'=>'required',
-            'chamber_days'=>'required',
+            'chamber_day_id'=>'required',
             'chamber_time'=>'required',
+
         ]);
 
         try {
@@ -46,14 +50,22 @@ class DoctorController extends Controller
             $doctor->doctor_type    = $request->doctor_type;
             $doctor->department_id  = $request->department_id;
             $doctor->specialization = $request->specialization;
-            $doctor->chamber_days   = $request->chamber_days;
             $doctor->chamber_time   = $request->chamber_time;
 
+            for($i=0; $i< count($request->chamber_day_id); $i++){
+
+                $doctor_chamber_day                     = new DoctorChamber();
+
+                $doctor_chamber_day->doctor_id          = $doctor['id'] == null ? 1 : $doctor['id'];
+                $doctor_chamber_day->chamber_day_id     = $request[$i]['chamber_day_id'];
+                $doctor_chamber_day->save();
+            }
+
             if($request->hasFile('image')){
-                $image       = $request->file('image');
-                $image_name  = time().$image->getClientOriginalName();
-                $fileurl     = $image->move('stuff/', $image_name);
-                $doctor->image = $fileurl;
+                $image          = $request->file('image');
+                $image_name     = time().$image->getClientOriginalName();
+                $fileurl        = $image->move('doctor/', $image_name);
+                $doctor->image  = $fileurl;
             }
 
 
@@ -66,7 +78,7 @@ class DoctorController extends Controller
                 return redirect()
                     ->route('doctor_index')
                     ->with('alert.status', 'danger')
-                    ->with('alert.message','Created Successfullly');
+                    ->with('alert.message','Not Created');
             }
 
 
@@ -86,19 +98,20 @@ class DoctorController extends Controller
 
     public function update(Request $request, $id){
         $this->validate($request,[
+            'department_id'=>'required',
             'name'=>'required|min:5|max:35',
             'mobile'=>'required|numeric',
             'email'=>'required',
             'degree'=>'required',
             'designation'=>'required',
             'specialization'=>'required',
-            'chamber_days'=>'required',
+            'chamber_day_id'=>'required',
             'chamber_time'=>'required',
         ]);
 
         try {
 
-            $doctor                 = Stuff::find($id);
+            $doctor                 = Doctor::find($id);
 
             $doctor->name           = $request->name;
             $doctor->email          = $request->email;
@@ -108,8 +121,16 @@ class DoctorController extends Controller
             $doctor->doctor_type    = $request->doctor_type;
             $doctor->department_id  = $request->department_id;
             $doctor->specialization = $request->specialization;
-            $doctor->chamber_days   = $request->chamber_days;
             $doctor->chamber_time   = $request->chamber_time;
+
+            /*for($i=0; $i< count($request->chamber_days); $i++){
+
+                $doctor_chamber_day                         = new DoctorChamber();
+                $doctor_chamber_day[$i]->doctor_id          = $doctor->id;
+                $doctor_chamber_day[$i]->chamber_day_id     = $request[$i]['chamber_day_id'];
+                $doctor_chamber_day[$i]->save();
+            }*/
+
 
             if($request->hasFile('image')){
 
@@ -122,7 +143,7 @@ class DoctorController extends Controller
 
                 $image       = $request->file('image');
                 $image_name  = time().$image->getClientOriginalName();
-                $fileurl     = $image->move('stuff/', $image_name);
+                $fileurl     = $image->move('doctor/', $image_name);
                 $doctor->image = $fileurl;
             }
 
