@@ -14,7 +14,13 @@ class DoctorController extends Controller
 {
     public function index(){
         $doctors  =   Doctor::all();
-        return view('doctor::index',compact('doctors'));
+        for($i=0; $i < count($doctors); $i++){
+            $chamber_days   =   DoctorChamber::select('chamber_day_id')
+                                                ->where('doctor_id', $doctors[$i]->id)
+                                                ->get();
+        }
+
+        return view('doctor::index',compact('doctors','chamber_days'));
     }
 
     public function create(){
@@ -57,7 +63,7 @@ class DoctorController extends Controller
                 $doctor_chamber_day                     = new DoctorChamber();
 
                 $doctor_chamber_day->doctor_id          = $doctor['id'] == null ? 1 : $doctor['id'];
-                $doctor_chamber_day->chamber_day_id     = $request[$i]['chamber_day_id'];
+                $doctor_chamber_day->chamber_day_id     = $request['chamber_day_id'][$i];
                 $doctor_chamber_day->save();
             }
 
@@ -92,8 +98,14 @@ class DoctorController extends Controller
     }
 
     public function edit($id){
-        $doctor  =   Doctor::find($id);
-        return view('doctor::edit',compact('doctor'));
+        $doctor         =   Doctor::find($id);
+        $chamber_day    =   DoctorChamber::select('chamber_day_id')
+                                        ->where('doctor_id',$doctor->id)
+                                        ->get();
+
+        $departments    =   Department::all();
+
+        return view('doctor::edit',compact('doctor','chamber_day', 'departments'));
     }
 
     public function update(Request $request, $id){

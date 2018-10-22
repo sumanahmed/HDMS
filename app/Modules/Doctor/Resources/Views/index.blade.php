@@ -34,52 +34,67 @@
                                 <table class="uk-table" cellspacing="0" width="100%" id="dt_default" >
                                     <thead>
                                         <tr>
-                                        <th>#</th>
-                                        <th>Type</th>
-                                        <th>Name</th>
-                                        <th>Mobile</th>
-                                        <th>Age</th>
-                                        <th>Joining</th>
-                                        <th>Image</th>
-                                        <th class="uk-text-center">Action</th>
-                                    </tr>
+                                            <th>SL</th>
+                                            <th>Department</th>
+                                            <th>Name</th>
+                                            <th>Chamber Days</th>
+                                            <th>Chamber Time</th>
+                                            <th>Specialist</th>
+                                            <th>Degree</th>
+                                            <th class="uk-text-center">Action</th>
+                                        </tr>
                                     </thead>
 
                                     <tfoot>
                                         <tr>
-                                        <th>#</th>
-                                        <th>Type</th>
-                                        <th>Name</th>
-                                        <th>Mobile</th>
-                                        <th>Age</th>
-                                        <th>Joining</th>
-                                        <th>Image</th>
-                                        <th class="uk-text-center">Action</th>
-                                    </tr>
+                                            <th>SL</th>
+                                            <th>Department</th>
+                                            <th>Name</th>
+                                            <th>Chamber Days</th>
+                                            <th>Chamber Time</th>
+                                            <th>Specialist</th>
+                                            <th>Degree</th>
+                                            <th class="uk-text-center">Action</th>
+                                        </tr>
                                     </tfoot>
 
                                     <tbody>
-                                        {{--@foreach($doctors as $key=>$value)
+                                        @foreach($doctors as $key=>$doctor)
                                         <tr>
                                             <td>{{ $key+1 }}</td>
-                                            <td>Security Guard</td>
-                                            <td>{{ $value->name }}</td>
-                                            <td>{{ $value->mobile }}</td>
-                                            <td>{{ $value->age }}</td>
-                                            <td>{{ date('j m,Y', strtotime($value->joining_date))}}</td>
-                                            <td><img src="{{ asset($value->image) }}" style="width: 80px;height: 60px;"/> </td>
+                                            <td>{{ $doctor->department->name }}</td>
+                                            <td>{{ $doctor->name }}</td>
                                             <td>
-                                               --}}{{-- <a href="{{ route('income_show', ['id' => $value->id]) }}">
-                                                    <i data-uk-tooltip="{pos:'top'}" title="View" class="md-icon material-icons">visibility</i>
-                                                </a>--}}{{--
-                                                <a href="{{ route('doctor_edit', ['id' => $value->id]) }}">
+                                                @foreach($chamber_days as $chamber_day)
+                                                    @if($chamber_day->chamber_day_id == 1)
+                                                        Saturday,
+                                                    @elseif($chamber_day->chamber_day_id == 2)
+                                                        Sunday,
+                                                    @elseif($chamber_day->chamber_day_id == 3)
+                                                        Monday,
+                                                    @elseif($chamber_day->chamber_day_id == 4)
+                                                        Tuesday,
+                                                    @elseif($chamber_day->chamber_day_id == 5)
+                                                        Wednesday,
+                                                    @elseif($chamber_day->chamber_day_id == 6)
+                                                        Thursday,
+                                                    @else
+                                                        Friday
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>{{ $doctor->chamber_time}}</td>
+                                            <td>{{ $doctor->specialization }}</td>
+                                            <td>{{ $doctor->degree }}</td>
+                                            <td>
+                                                <a href="{{ route('doctor_edit', ['id' => $doctor->id]) }}">
                                                     <i data-uk-tooltip="{pos:'top'}" title="Edit" class="md-icon material-icons">&#xE254;</i>
                                                 </a>
                                                 <a class="delete_btn"><i data-uk-tooltip="{pos:'top'}" title="Delete" class="md-icon material-icons">&#xE872;</i></a>
-                                                <input type="hidden" class="doctor_id" value="{{ $value->id }}">
+                                                <input type="hidden" class="doctor_id" value="{{ $doctor->id }}">
                                             </td>
                                         </tr>
-                                    @endforeach--}}
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

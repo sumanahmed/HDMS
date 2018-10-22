@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="uk-width-medium-2-5">
                                         <label for="income_date">Email</label>
-                                        <input class="md-input" type="email" id="email" name="email" value="{{ old('mobile') }}" required>
+                                        <input class="md-input" type="email" id="email" name="email" value="{{ old('email') }}" required>
                                         @if ($errors->has('email'))
                                             <span class="error">
                                                 <strong>{{ $errors->first('email') }}</strong>
@@ -71,6 +71,7 @@
                                         @endif
                                     </div>
                                 </div>
+
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-5  uk-vertical-align">
                                         <label class="uk-vertical-align-middle" for="mobile">Mobile<span class="req">*</span></label>
@@ -148,22 +149,48 @@
                                         <label class="uk-vertical-align-middle" for="chamber_day_id">Chamber Days<span class="req">*</span></label>
                                     </div>
                                     <div class="uk-width-medium-2-5">
-                                        <div class="uk-input-group">
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="1" data-md-icheck/></span>
-                                            <label>Saturday</label>
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="2" data-md-icheck/></span>
-                                            <label>Sunday</label>
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="3" data-md-icheck/></span>
-                                            <label>Monday</label>
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="4" data-md-icheck/></span>
-                                            <label>Tuesday</label>
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="5" data-md-icheck/></span>
-                                            <label>Wednesday</label>
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="6" data-md-icheck/></span>
-                                            <label>Thursday</label>
-                                            <span class="uk-input-group-addon"><input type="checkbox" name="chamber_day_id[]" value="7" data-md-icheck/></span>
-                                            <label>Friday</label>
+
+                                        <div class="uk-grid uk-grid-medium form_section form_section_separator" id="d_form_section" data-uk-grid-match>
+                                            <div class="uk-width-9-10">
+                                                <div class="uk-grid">
+                                                    <div class="uk-width-1-1">
+                                                        <div class="parsley-row">
+                                                            <select id="type" name="department_id" required data-md-selectize aria-required="true">
+                                                                <option value="1">Saturday</option>
+                                                                <option value="2">Sunday</option>
+                                                                <option value="3">Monday</option>
+                                                                <option value="4">Tuesday</option>
+                                                                <option value="5">Wednesday</option>
+                                                                <option value="6">Thursday</option>
+                                                                <option value="7">Friday</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid">
+                                                    <div class="uk-width-1-2">
+                                                        <div class="parsley-row">
+                                                            <label>Chamber Start Time</label>
+                                                            <input type="text" class="md-input" name="chamber_start_time" data-uk-timepicker>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-2">
+                                                        <div class="parsley-row">
+                                                            <label>Chamber End Time</label>
+                                                            <input type="text" class="md-input" name="chamber_end_time" data-uk-timepicker>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-1-10 uk-text-center">
+                                                <div class="uk-vertical-align uk-height-1-1">
+                                                    <div class="uk-vertical-align-middle">
+                                                        <a href="#" class="btnSectionClone" data-section-clone="#d_form_section"><i class="material-icons md-36">&#xE146;</i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+
                                         @if ($errors->has('chamber_day_id'))
                                             <span class="error">
                                                 <strong>{{ $errors->first('chamber_day_id') }}</strong>
