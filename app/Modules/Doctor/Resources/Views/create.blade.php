@@ -146,16 +146,16 @@
 
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-5  uk-vertical-align">
-                                        <label class="uk-vertical-align-middle" for="chamber_day_id">Chamber Days<span class="req">*</span></label>
+                                        <label class="uk-vertical-align-middle" for="d_form_section">Chamber Days<span class="req">*</span></label>
                                     </div>
                                     <div class="uk-width-medium-2-5">
 
-                                        <div class="uk-grid uk-grid-medium form_section form_section_separator" id="d_form_section" data-uk-grid-match>
+                                        <div class="uk-grid uk-grid-medium form_section" id="d_form_section" data-uk-grid-match>
                                             <div class="uk-width-9-10">
                                                 <div class="uk-grid">
                                                     <div class="uk-width-1-1">
                                                         <div class="parsley-row">
-                                                            <select id="type" name="department_id" required data-md-selectize aria-required="true">
+                                                            <select id="chamber_days" name="chamber_days" required data-md-selectize aria-required="true">
                                                                 <option value="1">Saturday</option>
                                                                 <option value="2">Sunday</option>
                                                                 <option value="3">Monday</option>
@@ -171,13 +171,29 @@
                                                     <div class="uk-width-1-2">
                                                         <div class="parsley-row">
                                                             <label>Chamber Start Time</label>
-                                                            <input type="text" class="md-input" name="chamber_start_time" data-uk-timepicker>
+                                                            <input type="text" class="md-input" name="chamber_start_time[]" data-uk-timepicker>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-2">
+                                                        <div class="parsley-row">
+                                                            <select id="chamber_start_time_am_pm" name="chamber_start_time_am_pm[]" required data-md-selectize aria-required="true">
+                                                                <option value="1">AM</option>
+                                                                <option value="2">PM</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="uk-width-1-2">
                                                         <div class="parsley-row">
                                                             <label>Chamber End Time</label>
-                                                            <input type="text" class="md-input" name="chamber_end_time" data-uk-timepicker>
+                                                            <input type="text" class="md-input" name="chamber_end_time[]" data-uk-timepicker>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-width-1-2">
+                                                        <div class="parsley-row">
+                                                            <select id="chamber_end_time_am_pm" name="chamber_end_time_am_pm[]" required data-md-selectize aria-required="true">
+                                                                <option value="1">AM</option>
+                                                                <option value="2">PM</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -190,27 +206,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        @if ($errors->has('chamber_day_id'))
-                                            <span class="error">
-                                                <strong>{{ $errors->first('chamber_day_id') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="uk-grid" data-uk-grid-margin>
-                                    <div class="uk-width-medium-1-5  uk-vertical-align">
-                                        <label class="uk-vertical-align-middle" for="chamber_time">Chamber Time<span class="req">*</span></label>
-                                    </div>
-                                    <div class="uk-width-medium-2-5">
-                                        <label for="chamber_time">6:00 A.M to 10 A.M</label>
-                                        <input class="md-input" type="text" id="nid" name="chamber_time"  value="{{ old('chamber_time') }}" required>
-                                        @if ($errors->has('chamber_time'))
-                                            <span class="error">
-                                                <strong>{{ $errors->first('chamber_time') }}</strong>
-                                            </span>
-                                        @endif
                                     </div>
                                 </div>
 

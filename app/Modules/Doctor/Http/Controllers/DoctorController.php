@@ -29,7 +29,7 @@ class DoctorController extends Controller
     }
 
     public function store(Request $request){
-
+        
         $this->validate($request,[
 
             'department_id'=>'required',
