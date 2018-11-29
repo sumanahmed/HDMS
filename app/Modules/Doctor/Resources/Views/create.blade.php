@@ -155,7 +155,7 @@
                                                 <div class="uk-grid">
                                                     <div class="uk-width-1-1">
                                                         <div class="parsley-row">
-                                                            <select id="chamber_days" name="chamber_days" required data-md-selectize aria-required="true">
+                                                            <select id="chamber_day_id" name="chamber_day_id[]" data-md-selectize aria-required="true">
                                                                 <option value="1">Saturday</option>
                                                                 <option value="2">Sunday</option>
                                                                 <option value="3">Monday</option>
@@ -170,33 +170,16 @@
                                                 <div class="uk-grid">
                                                     <div class="uk-width-1-2">
                                                         <div class="parsley-row">
-                                                            <label>Chamber Start Time</label>
-                                                            <input type="text" class="md-input" name="chamber_start_time[]" data-uk-timepicker>
+                                                            <input class="kUI_timepicker_range_start" name="chamber_start_time[]" class="uk-form-width-medium" value="{{ old('chamber_start_time') }}" placeholder="Start Time" />
                                                         </div>
                                                     </div>
                                                     <div class="uk-width-1-2">
                                                         <div class="parsley-row">
-                                                            <select id="chamber_start_time_am_pm" name="chamber_start_time_am_pm[]" required data-md-selectize aria-required="true">
-                                                                <option value="1">AM</option>
-                                                                <option value="2">PM</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-2">
-                                                        <div class="parsley-row">
-                                                            <label>Chamber End Time</label>
-                                                            <input type="text" class="md-input" name="chamber_end_time[]" data-uk-timepicker>
-                                                        </div>
-                                                    </div>
-                                                    <div class="uk-width-1-2">
-                                                        <div class="parsley-row">
-                                                            <select id="chamber_end_time_am_pm" name="chamber_end_time_am_pm[]" required data-md-selectize aria-required="true">
-                                                                <option value="1">AM</option>
-                                                                <option value="2">PM</option>
-                                                            </select>
+                                                            <input class="kUI_timepicker_range_end" name="chamber_end_time[]" class="uk-form-width-medium" value="{{ old('chamber_end_time') }}"  placeholder="End Time" />
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                             <div class="uk-width-1-10 uk-text-center">
                                                 <div class="uk-vertical-align uk-height-1-1">

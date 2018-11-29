@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Stuff
+    Patient
 @endsection
 @section('styles')
 
@@ -25,7 +25,7 @@
                                 <div class="fileinput-preview fileinput-exists thumbnail"></div>
                             </div>
                             <div class="user_heading_content">
-                                <h2 class="heading_b"><span class="uk-text-truncate">All Stuff</span></h2>
+                                <h2 class="heading_b"><span class="uk-text-truncate">All Patient</span></h2>
                             </div>
                         </div>
                         <div class="user_content">
@@ -35,7 +35,7 @@
                                     <thead>
                                         <tr>
                                         <th>#</th>
-                                        <th>Type</th>
+                                        <th>Patient ID</th>
                                         <th>Name</th>
                                         <th>Mobile</th>
                                         <th>Age</th>
@@ -59,24 +59,9 @@
                                     </tfoot>
 
                                     <tbody>
-                                        @foreach($stuffs as $key=>$value)
+                                        @foreach($patients as $key=>$value)
                                         <tr>
                                             <td>{{ $key+1 }}</td>
-                                            @if($value->type == 1)
-                                                <td>Admin</td>
-                                            @elseif($value->type == 2)
-                                                    <td>Manager</td>
-                                            @elseif($value->type == 3)
-                                                    <td>Accountant</td>
-                                            @elseif($value->type == 4)
-                                                    <td>Accountant</td>
-                                            @elseif($value->type == 5)
-                                                    <td>IT</td>
-                                            @elseif($value->type == 6)
-                                                    <td>Receiptinist</td>
-                                            @else
-                                                    <td>Security Guard</td>
-                                            @endif
                                             <td>{{ $value->name }}</td>
                                             <td>{{ $value->mobile }}</td>
                                             <td>{{ $value->age }}</td>
@@ -100,7 +85,7 @@
                             <!-- Add branch plus sign -->
 
                             <div class="md-fab-wrapper branch-create">
-                                <a id="add_branch_button" href="{{ route('stuff_create') }}" class="md-fab md-fab-accent branch-create">
+                                <a id="add_branch_button" href="{{ route('patient_create') }}" class="md-fab md-fab-accent branch-create">
                                     <i class="material-icons">&#xE145;</i>
                                 </a>
                             </div>
@@ -113,12 +98,13 @@
     </div>
 @endsection
 @section('script')
+
     <script>
-        $('#sidebar_stuff').addClass('current_section');
+        $('#sidebar_patient_setting').addClass('current_section');
+        $('#sidebar_patient').addClass('act_item');
 
         $(window).load(function(){
-            $("#tiktok_account").trigger('click');
-
+            $("#tiktok2").trigger('click');
         })
 
         $('.delete_btn').click(function () {

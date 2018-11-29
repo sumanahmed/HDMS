@@ -1,6 +1,6 @@
 
 
-@include('layouts.backend.includes.head')
+{{--@include('layouts.backend.includes.head')--}}
 
 @section('custom_header_css')
     <link rel="stylesheet" href="{{ asset('assets/css/error_page.min.css') }}" />

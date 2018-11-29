@@ -12,7 +12,10 @@
 */
 
 Route::group(['prefix' => 'patient'], function () {
-    Route::get('/', function () {
-        dd('This is the Patient module index page. Build something great!');
-    });
+    Route::get('/index','PatientController@index')->name('patient_index');
+    Route::get('/create','PatientController@create')->name('patient_create');
+    Route::post('/store','PatientController@store')->name('patient_store');
+    Route::get('/edit/{id}','PatientController@edit')->name('patient_edit');
+    Route::post('/update/{id}','PatientController@update')->name('patient_update');
+    Route::get('/delete/{id}','PatientController@delete')->name('patient_delete');
 });

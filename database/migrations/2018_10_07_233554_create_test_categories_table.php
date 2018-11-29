@@ -13,7 +13,14 @@ class CreateTestCategoriesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('test_categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->text('summary')->nullable();
+            $table->text('image')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ class CreateTestCategoriesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('test_categories');
     }
 }

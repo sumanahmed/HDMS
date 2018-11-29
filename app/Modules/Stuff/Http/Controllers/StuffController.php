@@ -120,15 +120,13 @@ class StuffController extends Controller
                 return redirect()
                     ->route('stuff_index')
                     ->with('alert.status', 'success')
-                    ->with('alert.message','Created Successfullly');
+                    ->with('alert.message','Updated Successfullly');
             } else {
                 return redirect()
                     ->route('stuff_index')
                     ->with('alert.status', 'danger')
-                    ->with('alert.message','Created Successfullly');
+                    ->with('alert.message','Not Updated');
             }
-
-
 
 
         }

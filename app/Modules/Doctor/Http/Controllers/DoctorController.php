@@ -29,7 +29,7 @@ class DoctorController extends Controller
     }
 
     public function store(Request $request){
-        
+dd($request->chamber_day_id);
         $this->validate($request,[
 
             'department_id'=>'required',
@@ -40,7 +40,8 @@ class DoctorController extends Controller
             'designation'=>'required',
             'specialization'=>'required',
             'chamber_day_id'=>'required',
-            'chamber_time'=>'required',
+            'chamber_start_time'=>'required',
+            'chamber_end_time'=>'required',
 
         ]);
 

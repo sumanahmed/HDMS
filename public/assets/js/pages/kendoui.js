@@ -410,8 +410,8 @@ kendoUI = {
             $kUI_timepicker.kendoTimePicker();
         }
         // range selection
-        var $kUI_timepicker_range_start = $('#kUI_timepicker_range_start');
-        var $kUI_timepicker_range_end = $('#kUI_timepicker_range_end');
+        var $kUI_timepicker_range_start = $('.kUI_timepicker_range_start');
+        var $kUI_timepicker_range_end = $('.kUI_timepicker_range_end');
         if($kUI_timepicker_range_start.length && $kUI_timepicker_range_end.length) {
             function startChange() {
                 var startTime = start.value();
