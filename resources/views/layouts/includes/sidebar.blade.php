@@ -29,7 +29,9 @@
                         <a href="{{ route('patient_index') }}">Patient</a>
                     </li>
                 </ul>
-            </li><li id="sidebar_test_setting" title="Test">
+            </li>
+
+            <li id="sidebar_test_setting" title="Test">
                 <a href="#" id="tiktok1">
                     <span class="menu_icon">
                         <i class="material-icons">X</i>
@@ -41,10 +43,24 @@
                         <a href="{{ route('test_category_index') }}">Test Category</a>
                     </li>
                     <li id="sidebar_test">
-                        <a href="">Test</a>
+                        <a href="{{ route('test_index') }}">Test</a>
                     </li>
                     <li id="sidebar_test_report">
                         <a href="">Test Report</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li id="sidebar_prescription_setting" title="Prescription">
+                <a href="#" id="tiktok3">
+                    <span class="menu_icon">
+                        <i class="material-icons">P</i>
+                    </span>
+                    <span class="menu_title">Prescriptions</span>
+                </a>
+                <ul>
+                    <li id="sidebar_prescription">
+                        <a href="{{ route('prescription_index') }}">Prescription</a>
                     </li>
                 </ul>
             </li>

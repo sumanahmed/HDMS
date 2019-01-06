@@ -23,11 +23,14 @@ class CreateForeignKeyRelationsTable extends Migration
         Schema::table('tests', function(Blueprint $table) {
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreign('test_category_id')->references('id')->on('test_categories')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('prescription_id')->references('id')->on('prescriptions')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
 
         Schema::table('patient_current_status', function(Blueprint $table) {
             $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreign('prescription_id')->references('id')->on('prescriptions')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
 
         Schema::table('doctors', function(Blueprint $table) {

@@ -1,58 +1,47 @@
 @extends('layouts.master')
 @section('title')
-    Stuff
+    Patient
 @endsection
 @section('styles')
 
 @endsection
 
 @section('content')
-    <div class="uk-grid">
+    <div class="uk-grid" ng-app="patientApp" ng-controller="PatientController">
         <div class="uk-width-large-10-10">
-            {!! Form::open(['url' => route('stuff_update',['id'=>$stuff->id]), 'method' => 'POST', 'class' => 'user_edit_form', 'id' => 'my_profile', 'files' => 'true', 'enctype' => "multipart/form-data", 'novalidate']) !!}
+            {!! Form::open(['url' => route('patient_store'), 'method' => 'POST', 'class' => 'user_edit_form', 'id' => 'my_profile', 'files' => 'true', 'enctype' => "multipart/form-data", 'novalidate']) !!}
             <div class="uk-grid uk-grid-medium" data-uk-grid-margin>
                 <div class="uk-width-xLarge-10-10 uk-width-large-10-10">
                     <div class="md-card">
                         <div class="user_heading">
                             <div class="user_heading_content">
-                                <h2 class="heading_b"><span class="uk-text-truncate">Update Stuff</span></h2>
+                                <h2 class="heading_b"><span class="uk-text-truncate">Update Patient</span></h2>
                             </div>
                         </div>
-
 
                         <div class="user_content">
                             <div class="uk-margin-top">
 
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-5  uk-vertical-align">
-                                        <label class="uk-vertical-align-middle" for="type">Type<span class="req">*</span></label>
+                                        <label class="uk-vertical-align-middle" for="name">Patient ID<span class="req">*</span></label>
                                     </div>
                                     <div class="uk-width-medium-2-5">
-                                        <select id="type" name="type" required data-md-selectize aria-required="true">
-                                            <option value="">Choose..</option>
-                                            <option value="1" @if($stuff->type == 1) selected @endif>Admin</option>
-                                            <option value="2" @if($stuff->type == 2) selected @endif>Manager</option>
-                                            <option value="3" @if($stuff->type == 3) selected @endif>Accountant</option>
-                                            <option value="4" @if($stuff->type == 4) selected @endif>Pathlogist</option>
-                                            <option value="5" @if($stuff->type == 5) selected @endif>IT</option>
-                                            <option value="6" @if($stuff->type == 6) selected @endif>Receiptionist</option>
-                                            <option value="7" @if($stuff->type == 7) selected @endif>Security Guard</option>
-                                        </select>
-                                        @if ($errors->has('type'))
+                                        <input class="md-input" type="text" id="serial" name="serial" value="{{ "PID-".$patient->serial }}" required readonly>
+                                        @if ($errors->has('serial'))
                                             <span class="error">
-                                                <strong>{{ $errors->first('type') }}</strong>
+                                                <strong>{{ $errors->first('serial') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
-
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-5  uk-vertical-align">
                                         <label class="uk-vertical-align-middle" for="name">Name<span class="req">*</span></label>
                                     </div>
                                     <div class="uk-width-medium-2-5">
                                         <label for="income_date">Name</label>
-                                        <input class="md-input" type="text" id="name" name="name" value="{{ $stuff->name }}" required>
+                                        <input class="md-input" type="text" id="name" name="name" value="{{ $patient->name }}" required>
                                         @if ($errors->has('name'))
                                             <span class="error">
                                                 <strong>{{ $errors->first('name') }}</strong>
@@ -63,11 +52,218 @@
 
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-5  uk-vertical-align">
-                                        <label class="uk-vertical-align-middle" for="mobile">Mobile<span class="req">*</span></label>
+                                        <label class="uk-vertical-align-middle" for="age">Age<span class="req">*</span></label>
                                     </div>
                                     <div class="uk-width-medium-2-5">
-                                        <label for="income_date">Mobile</label>
-                                        <input class="md-input" type="number" id="mobile" name="mobile" value="{{ $stuff->mobile }}" required>
+                                        <label for="age">Age</label>
+                                        <input class="md-input" type="number" id="age" name="age" value="{{ $patient->age }}" required>
+                                    </div>
+                                </div>
+
+                                <div class="uk-grid" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-2">
+                                        <label for="weight">Blood Pressure</label>
+                                        <input class="md-input" type="text" id="blood_pressure" name="blood_pressure" value="{{ $patient->blood_pressure }}" required>
+                                        @if ($errors->has('blood_pressure'))
+                                            <span class="error">
+                                                <strong>{{ $errors->first('blood_pressure') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <div class="uk-width-medium-1-2">
+                                        <label for="weight">Weight</label>
+                                        <input class="md-input" type="number" id="weight" name="weight" value="{{ $patient->weight }}">
+                                        @if ($errors->has('weight'))
+                                            <span class="error">
+                                                <strong>{{ $errors->first('weight') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="uk-grid" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-3  uk-vertical-align">
+                                        <label class="uk-vertical-align-middle" for="problem">Problem<span class="req">*</span></label>
+                                    </div>
+                                    <div class="uk-width-medium-2-3">
+                                        <textarea class="md-input ckeditor" id="problem" name="problem" value="{{ old('problem') }}" required>{{ $patient->problem }}</textarea>
+                                        @if ($errors->has('problem'))
+                                            <span class="error">
+                                                <strong>{{ $errors->first('problem') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="uk-grid" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-3  uk-vertical-align">
+                                        <label class="uk-vertical-align-middle" for="supervise_doctor_id">Supervise Doctor<span class="req">*</span></label>
+                                    </div>
+                                    <div class="uk-width-medium-2-3">
+                                        <select id="type" name="supervise_doctor_id" class="form-control" required>
+                                            <option selected disabled>Select</option>
+                                            @foreach($supervised_doctors as $doctor)
+                                                <option value="{{ $doctor->id }}" @if($doctor->id == $patient->supervise_doctor_id) selected @endif>{{ $doctor->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('supervise_doctor_id'))
+                                            <span class="error">
+                                                <strong>{{ $errors->first('supervise_doctor_id') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="uk-grid">
+                                    <div class="uk-width-1-2">
+                                        <div style=" padding:10px;height: 40px; color: white; background-color: #7cb342 ">
+                                            Click to Confirm Admit
+                                        </div>
+
+                                    </div>
+                                    <div class="uk-width-1-2" style="padding: 10px; height: 40px; position:relative;background: #7cb342 ">
+                                        <div id="inv" style="position: absolute; right: 10px; height: 40px; ">
+                                            <input @if( $patient->admit_status == 1 ) checked @endif type="checkbox" name="admit_status" value="1" id="admit_status" style=" margin-top: -1px; height: 25px; width: 20px;">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="uk-grid" id="admitContentBody" style="display:none;" >
+                                    <div class="uk-width-medium-1-1">
+
+                                        <div class="uk-grid" data-uk-grid-margin>
+                                            <div class="uk-width-medium-1-2">
+                                                <select id="ward_id" name="ward_id" class="form-control" required>
+                                                    <option selected disabled="">Select Ward</option>
+                                                    @foreach($wards as $ward)
+                                                        <option value="{{ $ward->id }}" @if($ward->id == $patient->ward_id) selected @endif>{{ "Ward No - ".$ward->ward_no }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has('ward_id'))
+                                                    <span class="error">
+                                                        <strong>{{ $errors->first('ward_id') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="uk-width-medium-1-2">
+                                                <select id="bed_id" name="bed_id" class="form-control" required>
+                                                    <option selected disabled="">Select Bed</option>
+                                                    @foreach($beds as $bed)
+                                                        <option value="{{ $bed->id }}"@if($bed->id == $patient->bed_id) selected @endif>{{ "Bed No - ".$bed->bed_no }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has('bed_id'))
+                                                    <span class="error">
+                                                        <strong>{{ $errors->first('bed_id') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="uk-grid" data-uk-grid-margin>
+
+                                            <div class="uk-width-medium-1-2">
+                                                <label for="weight">Admission Date</label>
+                                                <input class="md-input" type="text" id="admission_date" name="admission_date" value="{{ date($patient->	admission_date, strtotime("Y-m-d")) }}"  required readonly>
+                                                @if ($errors->has('admission_date'))
+                                                    <span class="error">
+                                                        <strong>{{ $errors->first('admission_date') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            <div class="uk-width-medium-1-2">
+                                                <label for="weight">Discharge Date</label>
+                                                <input class="md-input" type="text" id="discharge_date" name="discharge_date" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}" data-uk-datepicker="{format:'YYYY-MM-DD'}" required>
+                                                @if ($errors->has('discharge_date'))
+                                                    <span class="error">
+                                                        <strong>{{ $errors->first('discharge_date') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="uk-grid">
+                                    <div class="uk-width-1-2">
+                                        <div style=" padding:10px;height: 40px; color: white; background-color: maroon  ">
+                                            Patient Current Status
+                                        </div>
+
+                                    </div>
+                                    <div class="uk-width-1-2" style="padding: 10px; height: 40px; position:relative;background: maroon  ">
+                                        <div id="inv" style="position: absolute; right: 10px; height: 40px; ">
+                                            <input @if(!empty($patient_status)) checked @endif type="checkbox" name="checkbox_patient_status" id="checkbox_patient_status" style=" margin-top: -1px; height: 25px; width: 20px;">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="uk-grid" id="patientStatusBody" style="display:none;" >
+                                    <div class="uk-width-medium-1-1">
+
+                                        <table class="uk-table">
+                                            <thead>
+                                            <tr>
+                                                <th class="uk-text-nowrap">Symptom</th>
+                                                <th class="uk-text-nowrap">Status</th>
+                                                <th class="uk-text-nowrap">Doctor</th>
+                                                <th class="uk-text-nowrap">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="show_patient_status_row">
+                                                @php  $i = 1; @endphp
+                                                @foreach($patient_status as $status)
+                                                    <tr class="patient_status_row_{{ $i }}">
+                                                        <td>
+                                                            <input class="md-input symptom" name="symptom[]" id="symptom_{{ $i }}" value="{{ $status->symptom }}" placeholder="New Symptom" />
+                                                        </td>
+                                                        <td>
+                                                            <input class="md-input" name="status[]" id="status_{{ $i }}" value="{{ $status->status }}" placeholder="Status" />
+                                                        </td>
+                                                        <td>
+                                                            <select id="doctor_id_0" name="doctor_id[]" class="form-control" required>
+                                                                <option selected disabled>Select</option>
+                                                                @foreach($supervised_doctors as $doctor)
+                                                                    <option value="6{{ $doctor->id }}" @if($doctor->id == $status->doctor_id) selected @endif>{{ $doctor->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <a class="add_patient_status_row" ><i class="material-icons md-36">&#xE146;</i></a>
+                                                        </td>
+                                                    </tr>
+                                                    @php  $i++; @endphp
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="uk-grid" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-5  uk-vertical-align">
+                                        <label class="uk-vertical-align-middle" for="email">Email</label>
+                                    </div>
+                                    <div class="uk-width-medium-2-5">
+                                        <label for="email">Email</label>
+                                        <input class="md-input" type="email" id="email" name="email" value="{{ $patient->email }}" required>
+                                        @if ($errors->has('email'))
+                                            <span class="error">
+                                                <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="uk-grid" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-5  uk-vertical-align">
+                                        <label class="uk-vertical-align-middle" for="email">Mobile</label>
+                                    </div>
+                                    <div class="uk-width-medium-2-5">
+                                        <label for="mobile">Mobile</label>
+                                        <input class="md-input" type="text" id="mobile" name="mobile" value="{{ $patient->mobile }}" required>
                                         @if ($errors->has('mobile'))
                                             <span class="error">
                                                 <strong>{{ $errors->first('mobile') }}</strong>
@@ -78,81 +274,16 @@
 
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-5  uk-vertical-align">
-                                        <label class="uk-vertical-align-middle" for="age">Age</label>
+                                        <label class="uk-vertical-align-middle" for="image">Previous File</label>
                                     </div>
                                     <div class="uk-width-medium-2-5">
-                                        <label for="age">Age</label>
-                                        <input class="md-input" type="number" id="age" name="age" value="{{ $stuff->age }}">
-                                    </div>
-                                </div>
-                                <div class="uk-grid" data-uk-grid-margin>
-                                    <div class="uk-width-medium-1-5  uk-vertical-align">
-                                        <label class="uk-vertical-align-middle" for="gender">Gender<span class="req">*</span></label>
-                                    </div>
-                                    <div class="uk-width-medium-2-5">
-                                        <span>
-                                        <input type="radio" name="gender" id="val_radio_male" value="1" data-md-icheck @if($stuff->gender == 1) checked @endif/>
-                                            <label for="val_radio_male" class="inline-label">Male</label>
-                                        </span>
-                                        <span class="icheck-inline">
-                                            <input type="radio" name="gender" value="2"id="val_radio_female" data-md-icheck @if($stuff->gender == 2) checked @endif/>
-                                            <label for="val_radio_female" class="inline-label">Female</label>
-                                        </span>
-                                        @if ($errors->has('gender'))
-                                            <span class="error">
-                                                <strong>{{ $errors->first('gender') }}</strong>
-                                            </span>
-                                        @endif
+                                       <img src="{{ asset($patient->image) }}" style="width: 150px; height: 120px;" />
                                     </div>
                                 </div>
 
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-5  uk-vertical-align">
-                                        <label class="uk-vertical-align-middle" for="nid">NID<span class="req">*</span></label>
-                                    </div>
-                                    <div class="uk-width-medium-2-5">
-                                        <label for="nid">NID</label>
-                                        <input class="md-input" type="text" id="nid" name="nid" value="{{ $stuff->nid }}" required>
-                                        @if ($errors->has('nid'))
-                                            <span class="error">
-                                                <strong>{{ $errors->first('nid') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="uk-grid" data-uk-grid-margin>
-                                    <div class="uk-width-medium-1-5  uk-vertical-align">
-                                        <label class="uk-vertical-align-middle" for="degree">Degree</label>
-                                    </div>
-                                    <div class="uk-width-medium-2-5">
-                                        <label for="degree">Degree</label>
-                                        <input class="md-input" type="text" id="degree" name="degree" value="{{ $stuff->degree }}" >
-                                    </div>
-                                </div>
-
-                                <div class="uk-grid" data-uk-grid-margin>
-                                    <div class="uk-width-medium-1-5  uk-vertical-align">
-                                        <label class="uk-vertical-align-middle" for="joining_date">Joining Date<span class="req">*</span></label>
-                                    </div>
-                                    <div class="uk-width-medium-2-5">
-                                        <label for="joining_date">Select date</label>
-                                        <input class="md-input" type="text" id="joining_date" name="joining_date" value="{{ date('d-m-Y',strtotime($stuff->joining_date)) }}" data-uk-datepicker="{format:'DD.MM.YYYY'}" required>
-                                    </div>
-                                </div>
-
-                                <div class="uk-grid" data-uk-grid-margin>
-                                    <div class="uk-width-medium-1-5  uk-vertical-align">
-                                        <label class="uk-vertical-align-middle" for="image">File</label>
-                                    </div>
-                                    <div class="uk-width-medium-2-5">
-                                        <img src="{{ asset($stuff->image) }}" style="width:100px; height: 80px;"/>
-                                    </div>
-                                </div>
-
-                                <div class="uk-grid" data-uk-grid-margin>
-                                    <div class="uk-width-medium-1-5  uk-vertical-align">
-                                        <label class="uk-vertical-align-middle" for="image">File</label>
+                                        <label class="uk-vertical-align-middle" for="image">Update File</label>
                                     </div>
                                     <div class="uk-width-medium-2-5">
                                         <input type="file" name="image" class="md-input">
@@ -176,12 +307,77 @@
     </div>
 @endsection
 @section('script')
+
     <script>
-        $('#sidebar_stuff').addClass('current_section');
+        $("#admitContentBody").show();
+        $("#admit_status").on("click",function () {
+            $("#admitContentBody").toggle(800);
+        });
+
+        $("#patientStatusBody").show();
+        $("#checkbox_patient_status").on("click",function () {
+            $("#patientStatusBody").toggle(800);
+        });
+    </script>
+
+    <script>
+        //Get product by select company
+        $('#ward_id').change(function() {
+            var ward_id = $("#ward_id option:selected").val();
+            if(ward_id){
+                $.get('/patient/get-bed/'+ ward_id, function(data){
+                    $('#bed_id').empty();
+                    $('#bed_id').append('<option selected disabled value="">Select</option>');
+                    for(var i =0; i< data.length; i++){
+                        $('#bed_id').append( ' <option value="'+data[i].id+'">'+data[i].bed_no+'</option> ' );
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+
+        var i = $(".symptom").size() - 1;
+
+        $(".add_patient_status_row").click(function () {
+            i++;
+            $(".show_patient_status_row").append('' +
+                '<tr class="patient_status_row_'+ i +'">\n' +
+                '   <td>\n' +
+                '      <input class="md-input" name="symptom[]" id="symptom_'+ i +'" value="{{ old('symptom') }}" placeholder="New Symptom" />\n' +
+                '   </td>\n' +
+                '   <td>\n' +
+                '      <input class="md-input" name="status[]" id="status_'+ i +'" value="{{ old('status') }}" placeholder="Status" />\n' +
+                '   </td>\n' +
+                '   <td>\n' +
+                '      <select id="doctor_id_'+ i +'" name="doctor_id[]"  class="form-control" required>\n' +
+                '         <option selected disabled>Select</option>\n' +
+                '         @foreach($supervised_doctors as $doctor)\n' +
+                '             <option value="6{{ $doctor->id }}">{{ $doctor->name }}</option>\n' +
+                '          @endforeach\n' +
+                '       </select>\n' +
+                '   </td>\n' +
+                '   <td>\n' +
+                '      <a class="add_patient_status_row" onclick="deletePatientStatus('+ i +')" ><i class="material-icons md-36">delete</i></a>\n' +
+                '   </td>\n' +
+                ' </tr>\n' +
+                '');
+        });
+
+        function deletePatientStatus(index){
+            $(".patient_status_row_"+index).remove();
+        }
+    </script>
+
+    <script>
+        $('#sidebar_patient_setting').addClass('current_section');
+        $('#sidebar_patient').addClass('act_item');
 
         $(window).load(function(){
-            $("#tiktok_account").trigger('click');
-
+            $("#tiktok2").trigger('click');
         })
     </script>
+
+    <script src="{{ url('bower_components/ckeditor/ckeditor.js') }}"></script>
 @endsection

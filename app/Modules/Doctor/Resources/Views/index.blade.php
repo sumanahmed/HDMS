@@ -30,11 +30,11 @@
                         </div>
                         <div class="user_content">
                             <div class="uk-overflow-container uk-margin-bottom">
-                                <div style="padding: 5px;margin-bottom: 10px;" class="dt_colVis_buttons"></div>
-                                <table class="uk-table" cellspacing="0" width="100%" id="dt_default" >
+                                <div class="dt_colVis_buttons"></div>
+                                <table id="dt_colVis" class="uk-table" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>SL</th>
+                                            <th>#</th>
                                             <th>Department</th>
                                             <th>Name</th>
                                             <th>Chamber Days</th>
@@ -47,7 +47,7 @@
 
                                     <tfoot>
                                         <tr>
-                                            <th>SL</th>
+                                            <th>#</th>
                                             <th>Department</th>
                                             <th>Name</th>
                                             <th>Chamber Days</th>
@@ -113,10 +113,17 @@
         </div>
     </div>
 @endsection
+
 @section('script')
+
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+
     <script>
         $('#sidebar_doctor').addClass('current_section');
-
 
         $('.delete_btn').click(function () {
             var id = $(this).next('.doctor_id').val();

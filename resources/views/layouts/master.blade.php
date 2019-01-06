@@ -30,15 +30,30 @@
     <!-- style switcher -->
     <link href="{{ asset('assets/css/style_switcher.min.css') }}" media="all" rel="stylesheet">
 
-    <!-- altair admin -->
-    <link rel="stylesheet" href="{{ asset('assets/css/main.min.css') }}" media="all">
 
     <!-- themes -->
     <link rel="stylesheet" href="{{ asset('assets/css/themes/themes_combined.min.css') }}" media="all">
 
+    <!--- datatable CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/datatable.css') }}" media="all">
+
+    <!--- Select2 CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/select2.css') }}" media="all">
+
+
+    <!-- altair admin -->
+    <link rel="stylesheet" href="{{ asset('assets/css/main.min.css') }}" media="all">
+
     <!--- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" media="all">
 
+    <!--- Sweet alert CSS and JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/sweetalert2/6.4.4/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.4.4/sweetalert2.min.css">
+
+  {{--  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+--}}
     <!-- kendo UI -->
     <link rel="stylesheet" href="{{ asset('bower_components/kendo-ui/styles/kendo.common-material.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('bower_components/kendo-ui/styles/kendo.material.min.css') }}" id="kendoCSS"/>
@@ -66,10 +81,8 @@
 <div id="page_content">
     <div id="page_content_inner">
         <!-- main content start from here -->
-
-       @yield('content')
+            @yield('content')
         <!-- main content end from here -->
-
     </div>
 </div>
 
@@ -102,16 +115,8 @@
 <!-- altair common functions/helpers -->
 <script src="{{ asset('assets/js/altair_admin_common.min.js') }}"></script>
 
+
 <!-- datatables -->
-
-<!-- htmleditor (codeMirror) -->
-<script src="{{ asset('assets/js/uikit_htmleditor_custom.min.js') }}"></script>
-<!-- inputmask-->
-<script src="{{ asset('bower_components/jquery.inputmask/dist/jquery.inputmask.bundle.js') }}"></script>
-
-<!--  forms advanced functions -->
-<script src="{{ asset('assets/js/pages/forms_advanced.min.js') }}"></script>
-{{--<script src="{{ url('backend/assets/js/pages/page_contact_list.min.js') }}"></script>--}}
 <script src="{{ url('bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url('bower_components/datatables-buttons/js/dataTables.buttons.js') }}"></script>
 <script src="{{ url('assets/js/custom/datatables/buttons.uikit.js') }}"></script>
@@ -122,23 +127,40 @@
 <script src="{{ url('bower_components/datatables-buttons/js/buttons.html5.js') }}"></script>
 <script src="{{ url('bower_components/datatables-buttons/js/buttons.print.js') }}"></script>
 <script src="{{ url('assets/js/custom/datatables/datatables.uikit.min.js') }}"></script>
+<script src="{{ url('assets/js/pages/plugins_datatables.js') }}"></script>
 
-<!--  datatables functions -->
-<script src="{{ url('assets/js/pages/plugins_datatables.min.js') }}"></script>
+
+
+<!-- htmleditor (codeMirror) -->
+<script src="{{ asset('assets/js/uikit_htmleditor_custom.min.js') }}"></script>
+<!-- inputmask-->
+<script src="{{ asset('bower_components/jquery.inputmask/dist/jquery.inputmask.bundle.js') }}"></script>
+
+<!--  forms advanced functions -->
+<script src="{{ asset('assets/js/pages/forms_advanced.min.js') }}"></script>
+<script src="{{ url('bower_components/jszip/dist/jszip.min.js') }}"></script>
+<script src="{{ url('bower_components/pdfmake/build/pdfmake.min.js') }}"></script>
+<script src="{{ url('bower_components/pdfmake/build/vfs_fonts.js') }}"></script>
 
 <script src="{{ url('bower_components/ckeditor/ckeditor.js') }} "></script>
 
 <script src="{{ url('assets/js/custom/dropify/dist/js/dropify.min.js') }}"></script>
 
 
+<!--Datatable -->
+<script src="{{ asset('assets/js/datatable.js') }}"></script>
+
 <!-- kendo UI -->
 <script src="{{ asset('assets/js/kendoui_custom.min.js') }}"></script>
+
+<!--  select2 js -->
+<script src="{{ asset('assets/js/select2.js') }}"></script>
 
 <!--  kendoui functions -->
 <script src="{{ asset('assets/js/pages/kendoui.min.js') }}"></script>
 
 <script src="{{url('angular/angular.min.js')}}"></script>
-@yield('angular')
+
 @yield('script')
 
 

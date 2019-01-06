@@ -31,7 +31,7 @@
                         <div class="user_content">
                             <div class="uk-overflow-container uk-margin-bottom">
                                 <div style="padding: 5px;margin-bottom: 10px;" class="dt_colVis_buttons"></div>
-                                <table class="uk-table" cellspacing="0" width="100%" id="data_table" >
+                                <table id="dt_colVis" class="uk-table" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
                                         <th>#</th>

@@ -12,7 +12,12 @@
 */
 
 Route::group(['prefix' => 'prescription'], function () {
-    Route::get('/', function () {
-        dd('This is the Prescription module index page. Build something great!');
-    });
+    Route::get('/','PrescriptionController@index')->name('prescription_index');
+    Route::get('/create','PrescriptionController@create')->name('prescription_create');
+    Route::post('/store','PrescriptionController@store')->name('prescription_store');
+
+
+
+
+    Route::get('/medicine-taking-schedule/{type_id}','PrescriptionController@medicineTakingSchedule')->name('prescription_medicine_taking_schedule');
 });

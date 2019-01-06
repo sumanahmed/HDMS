@@ -19,7 +19,7 @@ class CreatePrescriptionsTable extends Migration
             $table->integer('doctor_id')->unsigned()->nullable();
             $table->string('medicine_name');
             $table->tinyInteger('medicine_type')->comment('1=tablet, 2=capsule, 3=injection, 4=saline, 5=syrup');
-            $table->string('dose');
+            $table->string('dose')->nullable();
             $table->string('taking_time');
             $table->string('duration');
             $table->string('date');

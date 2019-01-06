@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePatientCurrentStatusTable extends Migration
+class CreateMedicineTakingScheduleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreatePatientCurrentStatusTable extends Migration
      */
     public function up()
     {
-        Schema::create('patient_current_status', function (Blueprint $table) {
+        Schema::create('medicine_taking_schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('symptom');
-            $table->text('status');
-            $table->integer('patient_id')->unsigned()->nullable();
-            $table->integer('prescription_id')->unsigned()->nullable();
-            $table->integer('doctor_id')->unsigned()->nullable();
+            $table->tinyInteger('type')->comment("1=Tablet, 2=Capsule, 3=Injection, 4=Syrup");
+            $table->string('serial');
+            $table->string('schedule');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -32,6 +30,6 @@ class CreatePatientCurrentStatusTable extends Migration
      */
     public function down()
     {
-        Schema::drop('patient_current_status');
+        Schema::drop('medicine_taking_schedules');
     }
 }

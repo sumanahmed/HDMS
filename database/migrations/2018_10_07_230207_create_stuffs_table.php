@@ -17,7 +17,7 @@ class CreateStuffsTable extends Migration
             $table->increments('id');
             $table->tinyInteger('type')->comment('1=Admin,2=Manager,3=accountant,4=pathlogist,5=it,6=receiptionist,7=security guard');
             $table->string('name');
-            $table->integer('mobile');
+            $table->string('mobile');
             $table->integer('age')->nullable();
             $table->tinyInteger('gender');
             $table->string('nid')->nullable();

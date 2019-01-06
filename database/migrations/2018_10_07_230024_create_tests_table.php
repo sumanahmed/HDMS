@@ -16,8 +16,10 @@ class CreateTestsTable extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('patient_id')->unsigned()->nullable();
+            $table->integer('doctor_id')->unsigned()->nullable();
             $table->string('test_name');
             $table->integer('test_category_id')->unsigned()->nullable();
+            $table->integer('prescription_id')->unsigned()->nullable();
             $table->text('body_part');
             $table->rememberToken();
             $table->timestamps();

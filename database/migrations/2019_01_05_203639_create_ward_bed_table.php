@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePatientCurrentStatusTable extends Migration
+class CreateWardBedTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreatePatientCurrentStatusTable extends Migration
      */
     public function up()
     {
-        Schema::create('patient_current_status', function (Blueprint $table) {
+        Schema::create('ward_beds', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('symptom');
-            $table->text('status');
-            $table->integer('patient_id')->unsigned()->nullable();
-            $table->integer('prescription_id')->unsigned()->nullable();
-            $table->integer('doctor_id')->unsigned()->nullable();
+            $table->string('bed_no');
+            $table->integer('ward_id')->unsigned();
             $table->rememberToken();
             $table->timestamps();
+        });
+
+        Schema::table('wards', function(Blueprint $table) {
+            $table->foreign('ward_id')->references('id')->on('wards')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }
 
@@ -32,6 +33,6 @@ class CreatePatientCurrentStatusTable extends Migration
      */
     public function down()
     {
-        Schema::drop('patient_current_status');
+        Schema::drop('ward_beds');
     }
 }
