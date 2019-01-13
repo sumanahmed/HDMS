@@ -27,13 +27,28 @@
 
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-6  uk-vertical-align">
+                                        <label class="uk-vertical-align-middle" for="date">Date<span class="req">*</span></label>
+                                    </div>
+                                    <div class="uk-width-medium-2-6">
+                                        <label for="date"></label>
+                                        <input class="md-input" type="text" id="date" name="date" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}" data-uk-datepicker="{format:'YYYY-MM-DD'}" required>
+                                        @if ($errors->has('date'))
+                                            <span class="error">
+                                                <strong>{{ $errors->first('date') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="uk-grid" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-6  uk-vertical-align">
                                         <label class="uk-vertical-align-middle" for="patient_id">Patient<span class="req">*</span></label>
                                     </div>
                                     <div class="uk-width-medium-2-6">
                                         <select id="patient_id" name="patient_id" class="select-search md-input" required >
                                             <option selected disabled>Select</option>
                                             @foreach($patients as $patient)
-                                                <option value="{{ $patient->id }}">{{ $patient->serial." ".$patient->name }}</option>
+                                                <option value="{{ $patient->id }}">{{ "PID-".$patient->serial." ".$patient->name }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('patient_id'))
@@ -187,7 +202,6 @@
                                     <div class="uk-width-1-1 uk-float-left">
                                         <button type="submit" class="md-btn md-btn-primary" >Submit</button>
                                         <button type="button" class="md-btn md-btn-flat uk-modal-close">Close</button>
-                                        <button type="button" class="md-btn md-btn-success uk-modal-close">Print</button>
                                     </div>
                                 </div>
 
@@ -225,7 +239,7 @@
             $(".show_test_category_row").append('' +
                 '<tr class="test_row_'+i+'" >\n' +
                 '   <td>\n' +
-                '       <select id="test_category_id_'+i+'" class="test_category_list form-controlc" name="test_category_id[]" required>\n' +
+                '       <select id="test_category_id_'+i+'" class="test_category_list form-control" name="test_category_id[]" required>\n' +
                 '           <option selected disabled>Select</option>\n'+
                 '           @foreach($test_category as $category)\n' +
                 '               <option value="{{ $category->id }}">{{ $category->name }}</option>\n' +

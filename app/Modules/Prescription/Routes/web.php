@@ -15,6 +15,9 @@ Route::group(['prefix' => 'prescription'], function () {
     Route::get('/','PrescriptionController@index')->name('prescription_index');
     Route::get('/create','PrescriptionController@create')->name('prescription_create');
     Route::post('/store','PrescriptionController@store')->name('prescription_store');
+    Route::get('/show/{id}','PrescriptionController@show')->name('prescription_show');
+    Route::get('/edit/{id}','PrescriptionController@edit')->name('prescription_edit');
+    Route::get('/delete/{id}','PrescriptionController@delete')->name('prescription_delete');
 
 
 

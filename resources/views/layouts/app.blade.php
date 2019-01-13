@@ -15,7 +15,7 @@
 </head>
 <body>
     <div style="margin-top: 50px" id="app">
-       
+
 
         @yield('content')
     </div>

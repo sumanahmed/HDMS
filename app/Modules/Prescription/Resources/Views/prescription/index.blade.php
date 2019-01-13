@@ -29,15 +29,36 @@
                             </div>
                         </div>
                         <div class="user_content">
+
+                            <div class="uk-grid" data-uk-grid-margin>
+                                <div class="uk-width-medium-1-6  uk-vertical-align">
+                                    <label class="uk-vertical-align-middle" for="patient_id">Select Patient<span class="req">*</span></label>
+                                </div>
+                                <div class="uk-width-medium-2-6">
+                                    <select id="patient_id" name="patient_id" class="select-search md-input" required >
+                                        <option selected disabled>Select</option>
+                                        @foreach($prescriptions as $prescription)
+                                            <option value="{{ $prescription->patient_id }}">{{ "PID-".$prescription->patient->serial." ".$prescription->patient->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('patient_id'))
+                                        <span class="error">
+                                            <strong>{{ $errors->first('patient_id') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="uk-overflow-container uk-margin-bottom">
                                 <div style="padding: 5px;margin-bottom: 10px;" class="dt_colVis_buttons"></div>
                                 <table class="uk-table" cellspacing="0" width="100%" id="dt_default" >
                                     <thead>
                                         <tr>
                                         <th>#</th>
+                                        <th>Date</th>
+                                        <th>Patient ID</th>
                                         <th>Name</th>
-                                        <th>Summary</th>
-                                        <th>Image</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -45,29 +66,34 @@
                                     <tfoot>
                                         <tr>
                                         <th>#</th>
+                                        <th>Date</th>
+                                        <th>Patient ID</th>
                                         <th>Name</th>
-                                        <th>Summary</th>
-                                        <th>Image</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     </tfoot>
 
                                     <tbody>
-                                        {{--@foreach($test_cateogry as $key=>$value)
+                                        @foreach($prescriptions as $key=>$prescription)
                                             <tr>
                                                 <td>{{ $key+1 }}</td>
-                                                <td>{{ $value->name }}</td>
-                                                <td>{{ $value->summary }}</td>
-                                                <td> @if($value->image)<img src="{{ asset($value->image) }}" style="width: 80px;height: 60px;"/> @endif </td>
+                                                <td>{{ $prescription->date }}</td>
+                                                <td>{{ "PID-".$prescription->patient->serial }}</td>
+                                                <td>{{ $prescription->patient->name }}</td>
+                                                <td>{{ $prescription->patient->admit_status == 1 ? 'Admitted' : 'Discharged' }}</td>
                                                 <td>
-                                                    <a href="{{ route('test_category_edit', ['id' => $value->id]) }}">
+                                                    <a href="{{ route('prescription_show', ['id' => $prescription->id]) }}">
+                                                        <i data-uk-tooltip="{pos:'top'}" title="View" class="md-icon material-icons">visibility</i>
+                                                    </a>
+                                                    <a href="{{ route('prescription_edit', ['id' => $prescription->id]) }}">
                                                         <i data-uk-tooltip="{pos:'top'}" title="Edit" class="md-icon material-icons">&#xE254;</i>
                                                     </a>
                                                     <a class="delete_btn"><i data-uk-tooltip="{pos:'top'}" title="Delete" class="md-icon material-icons">&#xE872;</i></a>
-                                                    <input type="hidden" class="stuff_id" value="{{ $value->id }}">
+                                                    <input type="hidden" class="stuff_id" value="{{ $prescription->id }}">
                                                 </td>
                                             </tr>
-                                        @endforeach--}}
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -90,6 +116,9 @@
 
 
     <script>
+        $(document).ready(function () {
+            $("#patient_id").select2();
+        });
 
         $('#sidebar_prescription_setting').addClass('current_section');
         $('#sidebar_prescription').addClass('act_item');

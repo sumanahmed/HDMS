@@ -81,6 +81,7 @@
 <div id="page_content">
     <div id="page_content_inner">
         <!-- main content start from here -->
+            @include('layouts.includes.alert')
             @yield('content')
         <!-- main content end from here -->
     </div>
