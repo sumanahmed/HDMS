@@ -10,6 +10,7 @@
 
     <div class="menu_section">
         <ul id="tiktok_account">
+            
             <li id="sidebar_master" title="Dashboard">
                 <a href="{{ route("home") }}">
                     <span class="menu_icon"><i class="material-icons">&#xE871;</i></span>
